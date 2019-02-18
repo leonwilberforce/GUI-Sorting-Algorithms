@@ -47,17 +47,15 @@ public class BarPanel extends JPanel{
     
     //The sorting method for the Shuttle Sort.
     public void ShuttleSort() throws InterruptedException{
-        Thread.sleep(1000);
+        Thread.sleep(5000);
         
         int passes = 0;
         int checks = 0;
         int swaps = 0;
         boolean isDone;
         for (int i = 0; i < array.length-1; i++) {
-            bars[i+1].setBackground(Color.GREEN);
-            bars[i+1].setBorder(BorderFactory.createLineBorder(Color.GREEN));
-            bars[i].setBackground(Color.WHITE);
-            bars[i].setBorder(BorderFactory.createLineBorder(Color.WHITE));
+            greenBar(bars[i+1]);
+            clearBar(bars[i]);
             passes++;
             this.revalidate();
             Thread.sleep(speed);
@@ -65,47 +63,36 @@ public class BarPanel extends JPanel{
                 checks++;
                 if (array[j] > array[j+1]) {
                     swaps++;
-                    bars[j].setBorder(BorderFactory.createLineBorder(Color.RED));
-                    bars[j+1].setBorder(BorderFactory.createLineBorder(Color.RED));
-                    bars[j].setBackground(Color.red);
-                    bars[j+1].setBackground(Color.red);
-                    bars[i+1].setBackground(Color.GREEN);
-                    bars[i+1].setBorder(BorderFactory.createLineBorder(Color.GREEN));
+                    
+                    redBar(bars[j]);
+                    redBar(bars[j+1]);
+                    greenBar(bars[i+1]);
                     swap(array, j, j+1);
                     this.revalidate();
+                    
                     Thread.sleep(speed);
                     
                     updateBars();
                     
                     Thread.sleep(speed);
                     
-                    bars[j].setBorder(BorderFactory.createLineBorder(Color.BLACK));
-                    bars[j+1].setBorder(BorderFactory.createLineBorder(Color.BLACK));
-                    bars[j].setBackground(Color.WHITE);
-                    bars[j+1].setBackground(Color.WHITE);
-                    bars[i+1].setBackground(Color.GREEN);
-                    bars[i+1].setBorder(BorderFactory.createLineBorder(Color.GREEN));
-                    
+                    clearBar(bars[j]);
+                    clearBar(bars[j+1]);
+                    greenBar(bars[i+1]);
                     this.revalidate();
                     
                 }else{
                     break;
                 }
             }
-            bars[i].setBackground(Color.WHITE);
-            bars[i].setBorder(BorderFactory.createLineBorder(Color.BLACK));
+            clearBar(bars[i]);
         }
         
         for (int i = 0; i <= array.length-1; i++) {
             Thread.sleep(50);
-            bars[i].setBackground(Color.GREEN);
+            greenBar(bars[i]);
             this.revalidate();
         }
-        
-//        System.out.println("\nPasses: "+ passes + "\nChecks: " + checks + "\nSwaps: " +swaps + "\n");
-//        for(int a: array){
-//            System.out.print(a+" ");
-//        }
     }
     
     // The sorting method of the bubble sort.
@@ -122,38 +109,32 @@ public class BarPanel extends JPanel{
                 checks++;
                 if (array[j]>array[j+1]) {
                     swaps++;
-                    bars[j].setBorder(BorderFactory.createLineBorder(Color.RED));
-                    bars[j+1].setBorder(BorderFactory.createLineBorder(Color.RED));
-                    bars[j].setBackground(Color.red);
-                    bars[j+1].setBackground(Color.red);
+                    redBar(bars[j]);
+                    redBar(bars[j+1]);
+                    
                     swap(array, j, j+1);
                     this.revalidate();
+                    
                     Thread.sleep(speed);
                     
                     updateBars();
                     
                     Thread.sleep(speed);
                     
-                    bars[j].setBorder(BorderFactory.createLineBorder(Color.BLACK));
-                    bars[j+1].setBorder(BorderFactory.createLineBorder(Color.BLACK));
-                    bars[j].setBackground(Color.WHITE);
-                    bars[j+1].setBackground(Color.WHITE);
-                    
+                    clearBar(bars[j]);
+                    clearBar(bars[j+1]);
                     this.revalidate();
                 }
             }
         }
         for (int i = 0; i <= array.length-1; i++) {
             Thread.sleep(50);
-            bars[i].setBackground(Color.GREEN);
+            greenBar(bars[i]);
             this.revalidate();
         }
         
         System.out.println("BubbleSort: ");
         System.out.println("\nPasses: "+ passes + "\nChecks: " + checks + "\nSwaps: " +swaps + "\n");
-        for(int a: array){
-            System.out.print(a+" ");
-        }
         
     }
     
@@ -164,48 +145,40 @@ public class BarPanel extends JPanel{
         int checks = 0;
         int swaps = 0;
         for (int i = 0; i < array.length; i++) {
-            bars[i].setBackground(Color.RED);
-            bars[i].setBorder(BorderFactory.createLineBorder(Color.RED));
+            redBar(bars[i]);
             passes++;
             this.revalidate();
             Thread.sleep(speed);
             for (int j = 0; j < array.length-1; j++) {
                 checks++;
-                bars[j].setBorder(BorderFactory.createLineBorder(Color.RED));
-                bars[j].setBackground(Color.red);
+                redBar(bars[j]);
                 this.revalidate();
                 if (array[j]>array[j+1]) {
                     swaps++;
-                    bars[j].setBorder(BorderFactory.createLineBorder(Color.RED));
-                    bars[j+1].setBorder(BorderFactory.createLineBorder(Color.RED));
-                    bars[j].setBackground(Color.red);
-                    bars[j+1].setBackground(Color.red);
+                    redBar(bars[j]);
+                    redBar(bars[j+1]);
                     swap(array, j, j+1);
                     this.revalidate();
+                    
                     Thread.sleep(speed);
                     updateBars();
                     
                     Thread.sleep(speed);
                     
-                    bars[j].setBorder(BorderFactory.createLineBorder(Color.BLACK));
-                    bars[j+1].setBorder(BorderFactory.createLineBorder(Color.BLACK));
-                    bars[j].setBackground(Color.WHITE);
-                    bars[j+1].setBackground(Color.WHITE);
+                    clearBar(bars[j]);
+                    clearBar(bars[j+1]);
                     
                     this.revalidate();
                 }
-                bars[j].setBorder(BorderFactory.createLineBorder(Color.BLACK));
-                bars[j].setBackground(Color.WHITE);
+                clearBar(bars[j]);
                 this.revalidate();
             }
             for (int j = array.length-1; j > 0; j--) {
                 checks++;
                 if (array[j] < array[j-1]) {
                     swaps++;
-                    bars[j].setBorder(BorderFactory.createLineBorder(Color.RED));
-                    bars[j-1].setBorder(BorderFactory.createLineBorder(Color.RED));
-                    bars[j].setBackground(Color.red);
-                    bars[j-1].setBackground(Color.red);
+                    redBar(bars[j]);
+                    redBar(bars[j-1]);
                     swap(array, j, j-1);
                     this.revalidate();
                     Thread.sleep(speed);
@@ -213,10 +186,8 @@ public class BarPanel extends JPanel{
                     
                     Thread.sleep(speed);
                     
-                    bars[j].setBorder(BorderFactory.createLineBorder(Color.BLACK));
-                    bars[j-1].setBorder(BorderFactory.createLineBorder(Color.BLACK));
-                    bars[j].setBackground(Color.WHITE);
-                    bars[j-1].setBackground(Color.WHITE);
+                    clearBar(bars[j]);
+                    clearBar(bars[j-1]);
                     
                     this.revalidate();
                 }
@@ -224,7 +195,7 @@ public class BarPanel extends JPanel{
         }
         for (int i = 0; i <= array.length-1; i++) {
             Thread.sleep(50);
-            bars[i].setBackground(Color.GREEN);
+            greenBar(bars[i]);
             this.revalidate();
         }
         System.out.println("Shaker Sort");
@@ -251,6 +222,21 @@ public class BarPanel extends JPanel{
         int temp = a[k];
         a[k] = a[l];
         a[l] = temp;
+    }
+    
+    public void redBar(JLabel bar){
+        bar.setBorder(BorderFactory.createLineBorder(Color.RED));
+        bar.setBackground(Color.RED);
+    }
+    
+    public void greenBar(JLabel bar){
+        bar.setBorder(BorderFactory.createLineBorder(Color.GREEN));
+        bar.setBackground(Color.GREEN);
+    }
+    
+    public void clearBar(JLabel bar){
+        bar.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        bar.setBackground(Color.WHITE);
     }
     
 }
