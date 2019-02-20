@@ -47,7 +47,7 @@ public class BarPanel extends JPanel{
     
     //The sorting method for the Shuttle Sort.
     public void ShuttleSort() throws InterruptedException{
-        Thread.sleep(5000);
+        Thread.sleep(1000);
         
         int passes = 0;
         int checks = 0;
@@ -126,6 +126,7 @@ public class BarPanel extends JPanel{
                     this.revalidate();
                 }
             }
+            greenBar(bars[array.length-i-1]);
         }
         for (int i = 0; i <= array.length-1; i++) {
             Thread.sleep(50);
